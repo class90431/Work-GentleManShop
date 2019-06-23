@@ -1,0 +1,5 @@
+@import "~bootstrap/scss/functions" ; // Step1: Import Bootstrap 套用變數的方法
+@import "./helpers/variables" ;       // Step2: Import Bootstrap 變數
+@import "~bootstrap/scss/bootstrap" ;
+
+@import "./dashboard" ;

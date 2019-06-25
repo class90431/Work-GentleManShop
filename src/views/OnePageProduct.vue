@@ -6,11 +6,11 @@
     <!-- {{ this.$route.params.id }} -->
     <div class="container-fluid">
     <div class="row">
-      <div class="card col-12 col-sm-8">
+      <div class="card col-sm-8">
         <img :src="product.imageUrl" class="card-img-top" alt="...">
       </div>
-      <div class="col-12 col-sm-4 text-left font-style pt-4 " id="productDetails">
-        <p class="font-weight-bold">{{ product.category }}</p>
+      <div class="col-sm-4 text-left font-style pt-4 " id="productDetails">
+        <p class="font-weight-bold text-dark">{{ product.category }}</p>
         <p class="text-muted">{{ product.title }}</p>
         <span v-if="product.origin_price !== product.price" >NT {{ product.price | currency }}</span>
         <span :class="{'text-decoration-through' : product.origin_price > product.price, 'text-opacity50': product.origin_price > product.price, 'ml-3': product.origin_price > product.price}"
@@ -27,8 +27,7 @@
             <option value="0" disabled selected="true" style="color:gray">--- 選擇數量 ---</option>
             <option :value="number" v-for="(number, index) in 10" :key="index">{{ number }}{{ product.unit }}</option>
           </select><br>
-          <button v-if="!status.btn" class="btn btn-black rounded-0 btn-sm btn-style">請選擇尺寸&數量</button>
-          <button v-else class="btn btn-black rounded-0 btn-sm btn-style" @click.prevent="addtoCart(product.id,product.size, product.num)">加入購物車</button>
+          <button :disabled="!status.btn"  class="btn btn-dark rounded-0 btn-sm btn-style" @click.prevent="addtoCart(product.id,product.size, product.num)">加入購物車</button>
         </div>
         <hr>
         <ul class="nav nav-tabs nav-justified " id="myTab" role="tablist">
@@ -209,6 +208,8 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Alert from '../components/AlertMessage'
@@ -226,11 +227,11 @@ export default {
     getProduct () {
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMER_PATH}/product/${this.id}`
       const vm = this
-      vm.isLoading = true
+      // vm.isLoading = true
       // console.log(api)
       this.$http.get(api).then((response) => {
         // console.log(response.data.success)
-        vm.isLoading = false
+        // vm.isLoading = false
         vm.product = response.data.product
         this.product.num = 0 // 預設下拉式數量の選單
         this.product.size = 0 // 預設下拉式大小の選單
@@ -246,24 +247,11 @@ export default {
       }
     },
     addtoCart (id, size, qty) {
-      // console.log(id, size, qty)
-      // const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMER_PATH}/cart`
-      // const vm = this
-      // vm.isLoading = true
-      // const cart = {
-      //   product_id: id,
-      //   size,
-      //   qty
-      // }
-      // this.$http.post(api, { data: cart }).then((response) => {
-      //   console.log(response.data)
-      //   vm.isLoading = false
-      //   vm.$bus.$emit('messsage:push', response.data.message, 'success')
-      //   vm.getCart()
-      // })
-      // console.log(this.$store.state.productsModules.tempProducts)
       this.$store.dispatch('addtoCart', { id, size, qty, vm: this })
     }
+  },
+  computed: {
+    ...mapGetters(['isLoading'])
   },
   components: {
     Navbar,

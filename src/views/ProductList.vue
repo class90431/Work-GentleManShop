@@ -204,8 +204,6 @@
 </template>
 
 <script>
-// 帳號： ud11336699@gmail.com
-// 密碼： 11336699
 import $ from 'jquery' // 載入 jQuery
 import Pagination from '../components/Pagination'
 export default {
@@ -294,12 +292,14 @@ export default {
         if (response.data) {
           $('#productModal').modal('hide')
           $('#delProductModal').modal('hide')
-          vm.$bus.$emit('messsage:push', response.data.message, 'success')
+          // vm.$bus.$emit('messsage:push', response.data.message, 'success')
+          vm.$store.dispatch('updateMessage', { message: response.data.message, status: 'success' })
           vm.getProducts(vm.pagination.current_page) // ’編輯完成‘後 更新頁面至 ‘當前頁面’
           vm.getAllProducts()
         } else {
           $('#productModal').modal('hide')
-          vm.$bus.$emit('messsage:push', response.data.message, 'danger')
+          // vm.$bus.$emit('messsage:push', response.data.message, 'danger')
+          vm.$store.dispatch('updateMessage', { message: response.data.message, status: 'danger' })
           console.log('失敗')
         }
       })
@@ -324,11 +324,13 @@ export default {
           // console.log(vm.tempProduct.imageUrl)
           // console.log(vm.tempProduct)
           vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl) // 因為無事先定義部分變數，所以用 $set 強制綁定
-          this.$bus.$emit('messsage:push', '上傳成功', 'success')
+          // this.$bus.$emit('messsage:push', '上傳成功', 'success')
+          vm.$store.dispatch('updateMessage', { message: '上傳成功', status: 'success' })
           vm.status.uploadFile = false
         } else {
           console.log(response.data.message)
-          this.$bus.$emit('messsage:push', response.data.message, 'warning')
+          // this.$bus.$emit('messsage:push', response.data.message, 'warning')
+          vm.$store.dispatch('updateMessage', { message: response.data.message, status: 'warning' })
           vm.status.uploadFile = false
         }
       })
@@ -343,7 +345,7 @@ export default {
         console.log(0)
       }
     },
-    sortSwitch (item) {
+    sortSwitch (item) { // 排序判斷
       this.status.isPagination = true // 將 Pagination 元件隱藏
       this.sortItem = item
       if (this.sortItem === 'category' || this.sortItem === 'title') {

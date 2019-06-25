@@ -5,7 +5,7 @@
         <router-link v-if="!$route.meta.keepAlive" :to="{name: 'home'}" class="position-absolute text-white text-decoration-none logo">GentleMan</router-link>
       </keep-alive>
       <keep-alive>
-        <a class="position-absolute text-white text-decoration-none menuLink" @click.prevent="status.menuSwitch = !status.menuSwitch">Menu<i class="fas fa-bars ml-3"></i></a>
+        <a v-if="!$route.meta.keepAlive" class="position-absolute text-white text-decoration-none menuLink" @click.prevent="status.menuSwitch = !status.menuSwitch">Menu<i class="fas fa-bars ml-3"></i></a>
       </keep-alive>
       <keep-alive>
         <transition name="slide" v-if="!$route.meta.keepAlive">
@@ -51,8 +51,8 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-  // @import "./assets/all";
+<style lang="scss" >
+  @import "./assets/all";
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

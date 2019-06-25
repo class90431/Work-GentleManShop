@@ -34,7 +34,8 @@ export default ({
       axios.delete(api).then((response) => {
         console.log(response.data)
         context.commit('LOADING', false)
-        vm.$bus.$emit('messsage:push', response.data.message, 'info') // 刪除購物車品項
+        // vm.$bus.$emit('messsage:push', response.data.message, 'info') // 刪除購物車品項
+        context.dispatch('updateMessage', { message: response.data.message, status: 'info' })
         // vm.getCart()
         context.dispatch('getCart')
       })
@@ -43,6 +44,7 @@ export default ({
       // console.log(id, size, qty, vm)
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOMER_PATH}/cart`
       context.commit('LOADING', true)
+      console.log(context)
       const cart = {
         product_id: id,
         size,
@@ -52,7 +54,8 @@ export default ({
         console.log(response.data)
         context.commit('LOADING', false)
         // console.log('bus????????????', vm)
-        vm.$bus.$emit('messsage:push', response.data.message, 'success')
+        // vm.$bus.$emit('messsage:push', response.data.message, 'success')
+        context.dispatch('updateMessage', { message: response.data.message, status: 'success' })
         // vm.getCart()
         context.dispatch('getCart')
       })

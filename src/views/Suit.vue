@@ -55,7 +55,6 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-  @import "../assets/all.scss";
   .carousel .carousel-item img {
     min-height: 300px;
     max-height: 400px;

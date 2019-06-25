@@ -143,6 +143,7 @@ export default new Router({
           name: 'productlist',
           component: () => import('./views/ProductList.vue'),
           meta: {
+            keepAlive: true, // 需要缓存 router-link
             requiresAuth: true // 導航守衛判斷依據,此依據用來決定此頁需不需要管理者登入才能前往
           }
         },

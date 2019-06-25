@@ -11,9 +11,9 @@
               <li class="nav-item" @click="status.cart = !status.cart">
                 <router-link to="" class="nav-link"><i class="fas fa-shopping-cart fa-xs icon-marginR"></i>Cart</router-link>
               </li>
-              <span class="bg-dark text-white rounded-circle" v-if="cart.carts.length !== 0" style="width:18px;height:18px;font-size:.5rem;">{{ cart.carts.length }}</span>
+              <span class="bg-dark text-white rounded-circle cart-num-position" v-if="cart.carts.length !== 0" style="width:18px;height:18px;font-size:.5rem;">{{ cart.carts.length }}</span>
               <div class="drop-menu-position border" style="min-width: 250px" v-if="status.cart">
-                <ul class="list-unstyled ul-style" v-if="cart.carts.length > 0">
+                <ul class="list-unstyled ul-style bg-white" v-if="cart.carts.length > 0">
                     <li class="border-bottom p-2 d-flex justify-content-around cart-hover-style" v-for="(item, index) in cart.carts" :key="index">
                       <router-link to="" class="text-muted text-decoration-none flex-row d-flex" @click.native="goToOneProduct(item.product)">
                         <div class="mr-2 cart-img" :style="{backgroundImage:`url(${item.product.imageUrl})`}" style="width:60px;height:80px">
@@ -76,35 +76,35 @@
               <router-link :to="{name : 'suit'}" class="nav-link p-0">
                 <span class="translate_en d-inline-block p-2"
                   onMouseOver="this.innerHTML = '套裝'"
-                  onMouseOut="this.innerHTML = 'SUIT'" style="width:60px">SUIT</span>
+                  onMouseOut="this.innerHTML = 'SUIT'" style="width:50px">SUIT</span>
               </router-link>
             </li>
             <li class="nav-item px-2">
               <router-link :to="{name : 'top'}" class="nav-link p-0">
                 <span class="translate_en d-inline-block p-2"
                   onMouseOver="this.innerHTML = '上身'"
-                  onMouseOut="this.innerHTML = 'TOP'" style="width:60px">TOP</span>
+                  onMouseOut="this.innerHTML = 'TOP'" style="width:50px">TOP</span>
               </router-link>
             </li>
             <li class="nav-item px-2">
               <router-link :to="{name : 'bottom'}" class="nav-link p-0">
                 <span class="translate_en d-inline-block p-2"
                   onMouseOver="this.innerHTML = '下身'"
-                  onMouseOut="this.innerHTML = 'BOTTOM'" style="width:80px">BOTTOM</span>
+                  onMouseOut="this.innerHTML = 'BOTTOM'" style="width:70px">BOTTOM</span>
               </router-link>
             </li>
             <li class="nav-item px-2">
               <router-link :to="{name : 'shoes'}" class="nav-link p-0">
                 <span class="translate_en d-inline-block p-2"
                   onMouseOver="this.innerHTML = '鞋子'"
-                  onMouseOut="this.innerHTML = 'SHOES'" style="width:50px">SHOES</span>
+                  onMouseOut="this.innerHTML = 'SHOES'" style="width:70px">SHOES</span>
               </router-link>
             </li>
             <li>
               <router-link :to="{name : 'acc'}" class="nav-link p-0">
                 <span class="translate_en d-inline-block p-2"
                   onMouseOver="this.innerHTML = '配件'"
-                  onMouseOut="this.innerHTML = 'ACC'" style="width:60px">ACC</span>
+                  onMouseOut="this.innerHTML = 'ACC'" style="width:50px">ACC</span>
               </router-link>
             </li>
           </ul>
@@ -179,10 +179,22 @@ export default {
   }
   .drop-menu-position {
     position: absolute;
-    top: 56px;
+    top: 100%;
     right: 0;
     background: white;
     z-index: 1;
+  }
+  @media(max-width: 992px){
+    .drop-menu-position{
+      top: 100%;
+    }
+  }
+  @media(max-width: 992px){
+    .cart-num-position{
+      position: absolute;
+      top: 50%;
+      right: 50%;
+    }
   }
   .cart-img {
     background-position: center;

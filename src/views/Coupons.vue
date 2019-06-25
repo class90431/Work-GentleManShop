@@ -2,7 +2,7 @@
   <div>
     <loading :active.sync="isLoading"></loading>
     <div class="text-right mt-4">
-      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+      <button class="btn btn-dark" data-toggle="modal" data-target="#exampleModal"
         @click="openModal(true)">建立新的優惠券
       </button>
     </div>
@@ -28,8 +28,10 @@
             <span v-else class="text-danger">未啟用</span>
           </td>
           <td>
-            <button type="button" class="btn-sm btn btn-outline-primary" @click.prevent="openModal(false,item)">編輯</button>
-            <button type="button" class="btn-sm btn btn-outline-danger" @click.prevent="deleteModal(item)">刪除</button>
+            <!-- <div class="btn-group"> -->
+              <button type="button" class="btn-sm btn btn-outline-primary mr-1" @click.prevent="openModal(false,item)">編輯</button>
+              <button type="button" class="btn-sm btn btn-outline-danger" @click.prevent="deleteModal(item)">刪除</button>
+            <!-- </div> -->
           </td>
         </tr>
       </tbody>
@@ -110,8 +112,6 @@
 </template>
 
 <script>
-// 帳號： ud11336699@gmail.com
-// 密碼： 11336699
 import $ from 'jquery'
 export default {
   data () {

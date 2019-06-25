@@ -36,8 +36,6 @@
 </template>
 
 <script>
-// 帳號： ud11336699@gmail.com
-// 密碼： 11336699
 export default {
   data () {
     return {

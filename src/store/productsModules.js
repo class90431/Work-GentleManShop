@@ -41,6 +41,7 @@ export default ({
         // console.log('tempproducts', typeof (this.state.tempProducts[0].price))
         // console.log('tempproducts', typeof (this.state.tempProducts[25].origin_price))
         console.log(context.state)
+        console.log('getProducts', context)
       })
     }
   },

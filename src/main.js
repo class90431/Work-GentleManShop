@@ -12,7 +12,6 @@ import 'bootstrap' // Import js file
 // 自己撰寫
 import App from './App.vue'
 import router from './router'// 載入路由器
-import './bus'
 import currencyFilter from './filters/currency' // 載入錢幣的 filter
 import timeFilter from './filters/time' // 載入時間的 filter
 import integerFilter from './filters/integer' // 載入只取整數的 filter

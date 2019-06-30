@@ -26,7 +26,7 @@
             <option value="0" disabled selected="true" style="color:gray">--- 選擇數量 ---</option>
             <option :value="number" v-for="(number, index) in 10" :key="index">{{ number }}{{ product.unit }}</option>
           </select><br>
-          <button :disabled="!status.btn"  class="btn btn-dark rounded-0 btn-sm btn-style" @click.prevent="addtoCart(product.id,product.size, product.num)">加入購物車</button>
+          <button :disabled="$store.state.isLoading"  class="btn btn-dark rounded-0 btn-sm btn-style" @click.prevent="addtoCart(product.id,product.size, product.num)">加入購物車</button>
         </div>
         <hr>
         <ul class="nav nav-tabs nav-justified " id="myTab" role="tablist">

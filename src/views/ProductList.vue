@@ -366,15 +366,15 @@ export default {
         return this.products
       } else if (this.sortItem === 'category' || this.sortItem === 'title') {
         let newData = vm.allProducts.sort(function (a, b) {
-          var A = a[vm.sortItem].toUpperCase() // ignore upper and lowercase
-          var B = b[vm.sortItem].toUpperCase() // ignore upper and lowercase
+          var A = a[vm.sortItem].toUpperCase()
+          var B = b[vm.sortItem].toUpperCase()
           if (A < B) {
             return -1
-          }
-          if (A > B) {
+          } else if (A > B) {
             return 1
+          } else {
+            return 0
           }
-          return 0
         })
         return newData
       } else if (this.status.isReverse) {
@@ -388,6 +388,7 @@ export default {
         })
         return newData
       }
+      return this.products
     }
   },
   components: {

@@ -24,7 +24,7 @@
                           <p class="m-0 text-left">QTY: {{ item.qty }}</p>
                         </div>
                       </router-link>
-                      <button class="btn" @click="removeCartItem(item.id)">
+                      <button class="btn" @click="removeCartItem(item.id)" :disabled="$store.state.isLoading">
                         <i class="fas fa-times"></i>
                       </button>
                     </li>
@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, Store } from 'vuex'
 
 export default {
   data () {
@@ -128,30 +128,28 @@ export default {
   methods: {
     goToOneProduct (item) {
       console.log(item.id)
-      // this.$router.push({
-      //   path: `/product/${item.id}`
-      // })
-      // this.$router.back(-1)
       console.log('path', this.path)
       this.$router.push(`/product/${item.id}`)
     },
     removeCartItem (id) {
       this.$store.dispatch('removeCartItem', { id, vm: this })
+      this.switchCrossDisabled()
     },
     ...mapActions(['getCart'])
   },
   computed: {
     // ...mapGetters(['isLoading', 'cart'])
-    ...mapGetters(['cart'])
+    ...mapGetters(['cart', 'isLoading'])
   },
   watch: {
     '$route' (to, from) { // 監聽 router，如果改變則重新載入頁面 => 解決 url 改變，網頁卻沒有轉換的問題。
-      // window.location.reload()
+      window.location.reload()
     }
   },
   created () {
     this.getCart()
     console.log('path', this.path)
+    console.log(this.$store.state.isLoading)
   }
 }
 </script>

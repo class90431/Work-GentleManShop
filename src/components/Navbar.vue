@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, Store } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {

@@ -203,13 +203,11 @@
         </div>
       </div>
     </div>
-    <Footer/>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
 
-import Footer from '../components/Footer'
 import Alert from '../components/AlertMessage'
 export default {
   data () {
@@ -252,7 +250,6 @@ export default {
     ...mapGetters(['isLoading'])
   },
   components: {
-    Footer,
     Alert
   },
   created () {
